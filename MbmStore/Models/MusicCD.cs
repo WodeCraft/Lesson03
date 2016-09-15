@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace MbmStore.Models
 {
@@ -36,5 +37,15 @@ namespace MbmStore.Models
             }
         }
 
+
+        public TimeSpan GetPlayingTime()
+        {
+            TimeSpan retValue = new TimeSpan(0, 0, 0);
+            foreach (Track track in tracks)
+            {
+                retValue += track.Length;
+            }
+            return retValue;
+        }
     }
 }

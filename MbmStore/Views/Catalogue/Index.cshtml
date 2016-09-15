@@ -6,7 +6,7 @@
 
 <style>
     .content {
-        overflow:hidden;
+        overflow: hidden;
         border: 1px solid black;
     }
 
@@ -38,7 +38,8 @@
     }
 </style>
 
-@helper RenderBook(Book book) {
+@helper RenderBook(Book book)
+{
     <div class="book">
         <strong>Title:</strong> @book.Title<br />
         <strong>Author:</strong> @book.Author<br />
@@ -50,7 +51,8 @@
     <br />
 }
 
-@helper RenderCD(MusicCD cd) {
+@helper RenderCD(MusicCD cd)
+{
     <div class="cd-info">
         <strong>Album:</strong> @cd.Title<br />
         <strong>Artist:</strong> @cd.Artist<br />
@@ -59,13 +61,21 @@
         <img src="/content/images/@cd.ImageUrl" height="150" alt="Book cover" />
     </div>
     <div class="track-list">
-        Tracks:<br />
+        <strong>Tracks:</strong>
         <ul style="list-style:decimal; list-style-position:inside;">
             @foreach (Track track in cd.Tracks)
             {
                 <li>@track.Title (@track.Composer) @track.Length.Minutes:@track.Length.Seconds.ToString("00")</li>
             }
         </ul>
+        @if (cd.GetPlayingTime().Hours > 0)
+        {
+            <strong>Total playing time:</strong> @cd.GetPlayingTime().ToString(@"hh\:mm\:ss")
+        }
+        else
+        {
+            <strong>Total playing time:</strong> @cd.GetPlayingTime().ToString(@"mm\:ss");
+        }
     </div>
     <br />
 }
